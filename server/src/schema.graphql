@@ -1,0 +1,30 @@
+type Query {
+    getChatByName(name: String!): [Chat]
+    getChat: [Chat]
+}
+
+type Mutation {
+    addChat(sender: String!, receiver: String!, body: String!): Chat!
+    deleteChatByName(name: String!): String
+}
+
+type Subscription {
+    user(name: String!): UserSubscriptionPayload!
+}
+
+enum MutationType {
+  CREATED
+  DELETED
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  data: Chat
+}
+
+type Chat {
+    id: ID!
+    sender: String!
+    receiver: String!
+    body: String!
+}
